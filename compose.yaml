@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_USER: ${DATABASE_USERNAME:-postgres}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-postgres}
-      POSTGRES_DB: ${DATABASE_NAME:-sistema-votacao_db}
+      POSTGRES_DB: ${DATABASE_NAME:-database}
       PGDATA: /var/lib/postgresql/data/pgdata
     ports:
       - "${DB_PORT:-5432}:5432"
