@@ -4,6 +4,10 @@ import io.github.gabitxt.gerenciamentousuario.model.UsuarioDTO;
 
 import java.util.List;
 
+// interface que vai implementar a criação de UsuarioDTO
+//
+
+
 public interface UsuarioService {
     /**
      * Cria um novo usuário.

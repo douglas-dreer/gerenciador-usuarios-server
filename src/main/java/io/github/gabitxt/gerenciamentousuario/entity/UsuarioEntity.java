@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+// classe que sera responsavel pela mais para frente pela convercao de usuario entiy em dto
 
 @AllArgsConstructor
 @NoArgsConstructor

@@ -2,7 +2,8 @@ package io.github.gabitxt.gerenciamentousuario.model;
 
 import io.github.gabitxt.gerenciamentousuario.enums.TipoDocumento;
 import lombok.*;
-
+// classe responsavel pela convercao de usuario DTO em usuario entiy
+//neste caso essa clase seria responsavel pela
 import java.time.LocalDate;
 
 @AllArgsConstructor
