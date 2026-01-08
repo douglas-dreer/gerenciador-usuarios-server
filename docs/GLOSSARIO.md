@@ -96,6 +96,9 @@
 | **Dependência** | Biblioteca externa utilizada pelo projeto. |
 | **Lombok** | Biblioteca que gera código boilerplate automaticamente. |
 | **SLF4J** | Simple Logging Facade for Java - Abstração de logging. |
+| **SpringDoc** | Biblioteca para gerar documentação OpenAPI a partir de código Spring. |
+| **Swagger** | Ferramenta de documentação de APIs que implementa a especificação OpenAPI. |
+| **OpenAPI** | Especificação padrão para descrever APIs REST. |
 
 ### Infraestrutura
 
@@ -134,6 +137,7 @@
 | **JPQL** | Java Persistence Query Language |
 | **JVM** | Java Virtual Machine |
 | **MVC** | Model-View-Controller |
+| **OAS** | OpenAPI Specification |
 | **ORM** | Object-Relational Mapping |
 | **PK** | Primary Key (Chave Primária) |
 | **REST** | Representational State Transfer |
@@ -248,6 +252,11 @@ mindmap
 | `@Builder` | Padrão Builder (Lombok) |
 | `@Data` | Getters, Setters, etc. (Lombok) |
 | `@FeignClient` | Cliente HTTP declarativo |
+| `@Tag` | Agrupa endpoints no Swagger |
+| `@Operation` | Documenta um endpoint no Swagger |
+| `@ApiResponses` | Define possíveis respostas HTTP |
+| `@Schema` | Documenta campos de DTOs |
+| `@Parameter` | Documenta parâmetros de endpoints |
 
 ---
 

@@ -331,6 +331,15 @@ classDiagram
 | **Decisão** | Usar PostgreSQL com Docker Compose |
 | **Consequências** | ✅ Open source<br/>✅ Suporte a JSON<br/>✅ Escalável<br/>⚠️ Requer Docker |
 
+### ADR-005: SpringDoc OpenAPI para Documentação
+
+| Item | Descrição |
+|------|-----------|
+| **Status** | Aceito |
+| **Contexto** | Necessidade de documentação interativa da API |
+| **Decisão** | Usar SpringDoc OpenAPI 3.0 com Swagger UI |
+| **Consequências** | ✅ Documentação automática a partir do código<br/>✅ Interface interativa para testes<br/>✅ Padrão OpenAPI 3.0<br/>✅ Suporte a anotações nos DTOs |
+
 ---
 
 ## Fluxo de Dados
