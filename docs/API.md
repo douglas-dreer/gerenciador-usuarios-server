@@ -3,6 +3,7 @@
 ## 📋 Índice
 
 - [Informações Gerais](#informações-gerais)
+- [Swagger / OpenAPI](#swagger--openapi)
 - [Autenticação](#autenticação)
 - [Endpoints de Usuários](#endpoints-de-usuários)
 - [Endpoints de Endereços](#endpoints-de-endereços)
@@ -18,7 +19,7 @@
 | Informação | Valor |
 |------------|-------|
 | **Base URL** | `http://localhost:8080` |
-| **Versão** | `v1` |
+| **Versão** | `v1.0.0` |
 | **Content-Type** | `application/json` |
 | **Charset** | `UTF-8` |
 
@@ -28,6 +29,72 @@
 Content-Type: application/json
 Accept: application/json
 ```
+
+---
+
+## Swagger / OpenAPI
+
+A API possui documentação interativa completa via **SpringDoc OpenAPI 3.0**.
+
+### URLs de Acesso
+
+```mermaid
+graph LR
+    subgraph "Documentação"
+        A[Swagger UI] -->|"/swagger-ui.html"| B[Interface Interativa]
+        C[OpenAPI JSON] -->|"/api-docs"| D[Especificação JSON]
+        E[OpenAPI YAML] -->|"/api-docs.yaml"| F[Especificação YAML]
+    end
+```
+
+| Recurso | URL | Descrição |
+|---------|-----|-----------|
+| **Swagger UI** | [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) | Interface web interativa |
+| **OpenAPI JSON** | [http://localhost:8080/api-docs](http://localhost:8080/api-docs) | Especificação em JSON |
+| **OpenAPI YAML** | [http://localhost:8080/api-docs.yaml](http://localhost:8080/api-docs.yaml) | Especificação em YAML |
+
+### Funcionalidades do Swagger UI
+
+- 🔹 **Try it out**: Execute requisições diretamente na interface
+- 🔹 **Schemas**: Visualize a estrutura dos DTOs
+- 🔹 **Exemplos**: Request/response com dados de exemplo
+- 🔹 **Validações**: Campos obrigatórios destacados
+- 🔹 **Filtro**: Pesquisa rápida de endpoints
+- 🔹 **Tempo de resposta**: Exibe duração das requisições
+
+### Configuração
+
+A configuração do OpenAPI está em `OpenApiConfig.java`:
+
+```java
+@Configuration
+public class OpenApiConfig {
+    @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI()
+            .info(new Info()
+                .title("API de Gerenciamento de Usuários")
+                .version("1.0.0")
+                .description("API RESTful para gerenciamento de usuários e endereços")
+                .contact(new Contact()
+                    .name("gabitxt")
+                    .url("https://github.com/Gabxt28"))
+                .license(new License()
+                    .name("MIT License")))
+            .servers(List.of(
+                new Server()
+                    .url("http://localhost:8080")
+                    .description("Servidor de Desenvolvimento")));
+    }
+}
+```
+
+### Tags Disponíveis
+
+| Tag | Descrição |
+|-----|-----------|
+| **Usuários** | Endpoints para gerenciamento de usuários |
+| **Endereços** | Endpoints para gerenciamento de endereços com integração ViaCEP |
 
 ---
 

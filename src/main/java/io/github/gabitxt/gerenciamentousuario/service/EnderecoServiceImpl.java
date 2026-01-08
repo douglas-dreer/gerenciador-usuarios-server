@@ -1,6 +1,7 @@
 package io.github.gabitxt.gerenciamentousuario.service;
 
 import io.github.gabitxt.gerenciamentousuario.api.service.ViaCepService;
+import io.github.gabitxt.gerenciamentousuario.controller.request.BuscarEnderecoPorTermoRequest;
 import io.github.gabitxt.gerenciamentousuario.controller.request.CriarEnderecoRequest;
 import io.github.gabitxt.gerenciamentousuario.entity.EnderecoEntity;
 import io.github.gabitxt.gerenciamentousuario.mapper.EnderecoMapper;
@@ -8,6 +9,8 @@ import io.github.gabitxt.gerenciamentousuario.model.EnderecoDTO;
 import io.github.gabitxt.gerenciamentousuario.repository.EnderecoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +35,15 @@ public class EnderecoServiceImpl implements EnderecoService {
         return enderecoRepository.findById(id)
                 .map(enderecoMapper::toDTO)
                 .orElse(null);
+    }
+
+    @Override
+    public List<EnderecoDTO> obterEnderecoPorTermo(BuscarEnderecoPorTermoRequest parametros) {
+        return viaCepService.buscarEnderecosPorLogradouro(
+                parametros.estado(),
+                parametros.cidade(),
+                parametros.termo()
+        );
     }
 
     @Override

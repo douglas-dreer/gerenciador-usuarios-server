@@ -1,7 +1,10 @@
 package io.github.gabitxt.gerenciamentousuario.service;
 
+import io.github.gabitxt.gerenciamentousuario.controller.request.BuscarEnderecoPorTermoRequest;
 import io.github.gabitxt.gerenciamentousuario.controller.request.CriarEnderecoRequest;
 import io.github.gabitxt.gerenciamentousuario.model.EnderecoDTO;
+
+import java.util.List;
 
 /**
  * Interface para o serviço de endereço.
@@ -21,6 +24,12 @@ public interface EnderecoService {
      * @return Endereco
      */
     EnderecoDTO buscarEnderecoPorId(Long id);
+
+    /**
+    * Busca endereços por estado, cidade e termo.
+     * @param request params
+    */
+    List<EnderecoDTO> obterEnderecoPorTermo(BuscarEnderecoPorTermoRequest parametros);
     /**
      * Atualiza um endereço.
      * 
