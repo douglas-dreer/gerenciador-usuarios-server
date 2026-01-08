@@ -6,14 +6,13 @@ import lombok.*;
 
 import java.time.LocalDate;
 
-@AllArgsConstructor
-@NoArgsConstructor
+@Entity
+@Table(name = "usuarios")
 @Getter
 @Setter
 @Builder
-
-@Table(name = "usuarios")
-@Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class UsuarioEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +27,9 @@ public class UsuarioEntity {
 
     @Enumerated(EnumType.STRING)
     private TipoDocumento tipoDocumento;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private EnderecoEntity endereco;
 
     @Column(nullable = false)
     private String numeroDocumento;

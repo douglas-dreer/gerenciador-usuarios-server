@@ -1,5 +1,7 @@
 package io.github.gabitxt.gerenciamentousuario.controller;
 
+import io.github.gabitxt.gerenciamentousuario.controller.request.AtualizarUsuarioRequest;
+import io.github.gabitxt.gerenciamentousuario.controller.request.CriarUsuarioRequest;
 import io.github.gabitxt.gerenciamentousuario.model.UsuarioDTO;
 import io.github.gabitxt.gerenciamentousuario.service.UsuarioService;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
+
     private final UsuarioService usuarioService;
 
     public UsuarioController(UsuarioService usuarioService) {
@@ -30,14 +33,14 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<UsuarioDTO> criarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
-        UsuarioDTO usuarioSalvo = usuarioService.criarUsuario(usuarioDTO);
+    public ResponseEntity<UsuarioDTO> criarUsuario(@RequestBody CriarUsuarioRequest request) {
+        UsuarioDTO usuarioSalvo = usuarioService.criarUsuario(request);
         URI location = URI.create(String.format("/usuarios/%s", usuarioSalvo.getId()));
         return ResponseEntity.created(location).body(usuarioSalvo);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<UsuarioDTO> atualizarUsuario(@PathVariable Long id, @RequestBody UsuarioDTO request) throws Exception {
+    public ResponseEntity<UsuarioDTO> atualizarUsuario(@PathVariable Long id, @RequestBody AtualizarUsuarioRequest request) throws Exception {
         UsuarioDTO usuarioAtualizado = usuarioService.atualizarUsuario(id, request);
         return ResponseEntity.ok(usuarioAtualizado);
     }
@@ -47,6 +50,4 @@ public class UsuarioController {
         usuarioService.deletarUsuario(id);
         return ResponseEntity.noContent().build();
     }
-
-
 }
