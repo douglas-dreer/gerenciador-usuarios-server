@@ -1,43 +1,46 @@
 package io.github.gabitxt.gerenciamentousuario.mapper;
 
+import io.github.gabitxt.gerenciamentousuario.controller.request.AtualizarUsuarioRequest;
+import io.github.gabitxt.gerenciamentousuario.controller.request.CriarUsuarioRequest;
 import io.github.gabitxt.gerenciamentousuario.entity.UsuarioEntity;
 import io.github.gabitxt.gerenciamentousuario.model.UsuarioDTO;
-import jakarta.validation.constraints.NotNull;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+/**
+ * Mapper específico para Usuario.
+ */
+@Slf4j
 @Component
 public class UsuarioMapper {
 
-    /**
-     * Converte uma entidade UsuarioEntity para um DTO UsuarioDTO
-     * @param entity
-     * @return UsuarioDTO
-     */
-    public UsuarioDTO convertToDomain(@NotNull UsuarioEntity entity) {
-       return UsuarioDTO.builder()
-               .id(entity.getId())
-               .nome(entity.getNome())
-                .email(entity.getEmail())
-               .dataNascimento(entity.getDataNascimento())
-               .tipoDocumento(entity.getTipoDocumento())
-               .numeroDocumento(entity.getNumeroDocumento())
-               .build();
+    public UsuarioDTO toDTO(UsuarioEntity entity) {
+        log.debug("Mapeando UsuarioEntity(id={}) para UsuarioDTO", entity != null ? entity.getId() : null);
+        return MapperUtils.convert(entity, UsuarioDTO.class);
     }
 
-    /**
-     * Converte um DTO UsuarioDTO para uma entidade UsuarioEntity
-     * @param dto
-     * @return UsuarioEntity
-     */
-    public UsuarioEntity convertToEntity(@NotNull UsuarioDTO dto) {
-        return UsuarioEntity.builder()
-                .id(dto.getId())
-                .nome(dto.getNome())
-                .email(dto.getEmail())
-                .dataNascimento(dto.getDataNascimento())
-                .tipoDocumento(dto.getTipoDocumento())
-                .numeroDocumento(dto.getNumeroDocumento())
-                .build();
+    public UsuarioDTO toDTO(CriarUsuarioRequest request) {
+        log.debug("Mapeando CriarUsuarioRequest para UsuarioDTO");
+        return MapperUtils.convert(request, UsuarioDTO.class);
     }
 
+    public UsuarioDTO toDTO(AtualizarUsuarioRequest request) {
+        log.debug("Mapeando AtualizarUsuarioRequest para UsuarioDTO");
+        return MapperUtils.convert(request, UsuarioDTO.class);
+    }
+
+    public UsuarioEntity toEntity(UsuarioDTO dto) {
+        log.debug("Mapeando UsuarioDTO(id={}) para UsuarioEntity", dto != null ? dto.getId() : null);
+        return MapperUtils.convert(dto, UsuarioEntity.class);
+    }
+
+    public UsuarioEntity toEntity(CriarUsuarioRequest request) {
+        log.debug("Mapeando CriarUsuarioRequest para UsuarioEntity");
+        return MapperUtils.convert(request, UsuarioEntity.class);
+    }
+
+    public UsuarioEntity toEntity(AtualizarUsuarioRequest request) {
+        log.debug("Mapeando AtualizarUsuarioRequest para UsuarioEntity");
+        return MapperUtils.convert(request, UsuarioEntity.class);
+    }
 }

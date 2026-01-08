@@ -29,3 +29,7 @@ spring:
         order_updates: true
   config:
     import: optional:file:.env[.properties]
+
+# Via Cep
+viacep:
+  url: https://viacep.com.br/ws

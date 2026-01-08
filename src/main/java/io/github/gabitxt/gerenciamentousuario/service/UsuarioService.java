@@ -1,5 +1,7 @@
 package io.github.gabitxt.gerenciamentousuario.service;
 
+import io.github.gabitxt.gerenciamentousuario.controller.request.AtualizarUsuarioRequest;
+import io.github.gabitxt.gerenciamentousuario.controller.request.CriarUsuarioRequest;
 import io.github.gabitxt.gerenciamentousuario.model.UsuarioDTO;
 
 import java.util.List;
@@ -7,10 +9,10 @@ import java.util.List;
 public interface UsuarioService {
     /**
      * Cria um novo usuário.
-     * @param usuarioDTO
+     * @param request
      * @return UsuarioDTO criado
      */
-    UsuarioDTO criarUsuario(UsuarioDTO usuarioDTO);
+    UsuarioDTO criarUsuario(CriarUsuarioRequest request);
 
     /**
      * Lista todos os usuários.
@@ -28,11 +30,11 @@ public interface UsuarioService {
     /**
      * Atualiza um usuário existente.
      * @param id
-     * @param usuarioDTO
+     * @param request
      * @return
      * @throws Exception
      */
-    UsuarioDTO atualizarUsuario(Long id, UsuarioDTO usuarioDTO) throws Exception;
+    UsuarioDTO atualizarUsuario(Long id, AtualizarUsuarioRequest request) throws Exception;
 
     /**
      * Deleta um usuário por ID.

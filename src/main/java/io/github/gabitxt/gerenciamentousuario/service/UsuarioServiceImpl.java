@@ -1,37 +1,39 @@
 package io.github.gabitxt.gerenciamentousuario.service;
 
+import io.github.gabitxt.gerenciamentousuario.api.service.ViaCepService;
+import io.github.gabitxt.gerenciamentousuario.controller.request.AtualizarUsuarioRequest;
+import io.github.gabitxt.gerenciamentousuario.controller.request.CriarUsuarioRequest;
 import io.github.gabitxt.gerenciamentousuario.entity.UsuarioEntity;
+import io.github.gabitxt.gerenciamentousuario.mapper.EnderecoMapper;
 import io.github.gabitxt.gerenciamentousuario.mapper.UsuarioMapper;
+import io.github.gabitxt.gerenciamentousuario.model.EnderecoDTO;
 import io.github.gabitxt.gerenciamentousuario.model.UsuarioDTO;
 import io.github.gabitxt.gerenciamentousuario.repository.UsuarioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UsuarioServiceImpl implements UsuarioService {
-    private final UsuarioRepository usuarioRepository;
-    private final UsuarioMapper mapper;
 
-    @Autowired
-    public UsuarioServiceImpl(UsuarioRepository usuarioRepository, UsuarioMapper mapper) {
-        this.usuarioRepository = usuarioRepository;
-        this.mapper = mapper;
-    }
+    private final UsuarioRepository usuarioRepository;
+    private final ViaCepService viaCepService;
+    private final UsuarioMapper usuarioMapper;
+    private final EnderecoMapper enderecoMapper;
 
     /**
      * Cria um novo usuário.
-     * @param usuarioDTO
+     * @param request
      * @return UsuarioDTO criado
      */
     @Override
-    public UsuarioDTO criarUsuario(UsuarioDTO usuarioDTO) {
-        UsuarioEntity entity = mapper.convertToEntity(usuarioDTO);
-        entity = usuarioRepository.save(entity);
-        UsuarioDTO resultado = mapper.convertToDomain(entity);
-        return resultado;
+    public UsuarioDTO criarUsuario(CriarUsuarioRequest request) {
+        UsuarioEntity usuarioEntity = buscarInformacoesEndereco(usuarioMapper.toEntity(request));
+        usuarioEntity = usuarioRepository.save(usuarioEntity);
+        return usuarioMapper.toDTO(usuarioEntity);
     }
 
     /**
@@ -42,7 +44,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     public List<UsuarioDTO> listarUsuarios() {
         return usuarioRepository.findAll()
                 .stream()
-                .map(mapper::convertToDomain)
+                .map(usuarioMapper::toDTO)
                 .toList();
     }
 
@@ -53,32 +55,27 @@ public class UsuarioServiceImpl implements UsuarioService {
      */
     @Override
     public UsuarioDTO buscarUsuarioPorId(Long id) {
-        UsuarioEntity entity = usuarioRepository.findById(id).orElse(null);
-        if (entity != null) {
-            return mapper.convertToDomain(entity);
-        } else {
-            return null;
-        }
+        return usuarioRepository.findById(id)
+                .map(usuarioMapper::toDTO)
+                .orElse(null);
     }
 
     @Override
-    public UsuarioDTO atualizarUsuario(Long id, UsuarioDTO usuarioDTO) throws Exception {
+    public UsuarioDTO atualizarUsuario(Long id, AtualizarUsuarioRequest request) throws Exception {
         // REGRA 01: Verificar se o usuário existe
         if (!usuarioRepository.existsById(id)) {
             throw new Exception("Usuário não encontrado");
         }
 
         // REGRA 02: O email do usuário solicitado já está cadastrado para outro usuário?
-        String emailSolicitado = usuarioDTO.getEmail();
-        Optional<UsuarioEntity> usuarioComEmail = usuarioRepository.findByEmail(emailSolicitado);
-
-        if (usuarioComEmail.isPresent()) {
+        Optional<UsuarioEntity> usuarioComEmail = usuarioRepository.findByEmail(request.email());
+        if (usuarioComEmail.isPresent() && !usuarioComEmail.get().getId().equals(id)) {
             throw new Exception("E-mail do usuário já está cadastrado para outro usuário");
         }
 
-        UsuarioEntity entity = mapper.convertToEntity(usuarioDTO);
-        UsuarioDTO resultado = mapper.convertToDomain(usuarioRepository.save(entity));
-        return resultado;
+        UsuarioEntity entity = usuarioMapper.toEntity(request);
+        entity.setId(id);
+        return usuarioMapper.toDTO(usuarioRepository.save(entity));
     }
 
     @Override
@@ -87,7 +84,19 @@ public class UsuarioServiceImpl implements UsuarioService {
         if (!usuarioRepository.existsById(id)) {
             throw new Exception("Usuário não encontrado");
         }
-
         usuarioRepository.deleteById(id);
+    }
+
+    private UsuarioEntity buscarInformacoesEndereco(UsuarioEntity usuario) {
+        if (usuario.getEndereco() == null || usuario.getEndereco().getCep() == null) {
+            return usuario;
+        }
+
+        EnderecoDTO enderecoOriginal = enderecoMapper.toDTO(usuario.getEndereco());
+        EnderecoDTO enderecoViaCep = viaCepService.buscarEnderecoPorCep(enderecoOriginal.cep());
+        EnderecoDTO enderecoFinal = enderecoMapper.merge(enderecoOriginal, enderecoViaCep);
+
+        usuario.setEndereco(enderecoMapper.toEntity(enderecoFinal));
+        return usuario;
     }
 }
