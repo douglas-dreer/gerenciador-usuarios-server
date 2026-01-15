@@ -92,12 +92,12 @@
 ### 📌 Epic 1.1: Estruturação das Exceções Customizadas (5 pts)
 
 #### Task 1.1.1: Criar hierarquia de exceções base
-- [ ] Criar package `exception` em `io.github.gabitxt.gerenciamentousuario`
-- [ ] Criar classe abstrata `BusinessException` extends `RuntimeException`
-  - [ ] Adicionar campo `errorCode` (String)
-  - [ ] Adicionar campo `details` (Map<String, Object>)
-  - [ ] Implementar construtores adequados
-- [ ] Documentar com Javadoc
+- [X] Criar package `exception` em `io.github.gabitxt.gerenciamentousuario`
+- [X] Criar classe abstrata `BusinessException` extends `RuntimeException`
+  - [X] Adicionar campo `errorCode` (String)
+  - [X] Adicionar campo `details` (Map<String, Object>)
+  - [X] Implementar construtores adequados
+- [X] Documentar com Javadoc
 
 #### Task 1.1.2: Criar exceções de domínio
 - [ ] Criar `ResourceNotFoundException` extends `BusinessException`
