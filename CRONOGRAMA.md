@@ -100,20 +100,20 @@
 - [X] Documentar com Javadoc
 
 #### Task 1.1.2: Criar exceções de domínio
-- [ ] Criar `ResourceNotFoundException` extends `BusinessException`
-  - [ ] Construtor com parâmetros: resourceName, fieldName, fieldValue
-  - [ ] Exemplo: "Usuário não encontrado com id: 123"
-- [ ] Criar `DuplicateResourceException` extends `BusinessException`
-  - [ ] Construtor com parâmetros: resourceName, fieldName, fieldValue
-  - [ ] Exemplo: "Email já cadastrado: joao@email.com"
-- [ ] Criar `ValidationException` extends `BusinessException`
-  - [ ] Suporte para múltiplos erros de validação
+- [X] Criar `ResourceNotFoundException` extends `BusinessException`
+  - [X] Construtor com parâmetros: resourceName, fieldName, fieldValue
+  - [X] Exemplo: "Usuário não encontrado com id: 123"
+- [X] Criar `DuplicateResourceException` extends `BusinessException`
+  - [X] Construtor com parâmetros: resourceName, fieldName, fieldValue
+  - [X] Exemplo: "Email já cadastrado: joao@email.com"
+- [X] Criar `ValidationException` extends `BusinessException`
+  - [X] Suporte para múltiplos erros de validação
 
 #### Task 1.1.3: Criar exceções de integração
-- [ ] Criar `ExternalServiceException` extends `BusinessException`
-  - [ ] Para erros de comunicação com ViaCEP
-- [ ] Criar `InvalidCepException` extends `BusinessException`
-  - [ ] Para CEP inválido ou não encontrado
+- [X] Criar `ExternalServiceException` extends `BusinessException`
+  - [X] Para erros de comunicação com ViaCEP
+- [X] Criar `InvalidCepException` extends `BusinessException`
+  - [X] Para CEP inválido ou não encontrado
 
 ### 📌 Epic 1.2: Implementação do Global Exception Handler (5 pts)
 
