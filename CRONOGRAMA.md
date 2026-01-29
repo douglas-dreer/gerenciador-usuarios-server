@@ -118,31 +118,31 @@
 ### 📌 Epic 1.2: Implementação do Global Exception Handler (5 pts)
 
 #### Task 1.2.1: Configurar GlobalExceptionHandler
-- [ ] Adicionar anotação `@RestControllerAdvice` na classe
-- [ ] Adicionar `@Slf4j` para logging
-- [ ] Injetar `MessageSource` para internacionalização futura
+- [x] Adicionar anotação `@RestControllerAdvice` na classe
+- [x] Adicionar `@Slf4j` para logging
+- [x] Injetar `MessageSource` para internacionalização futura
 
 #### Task 1.2.2: Implementar handlers específicos
-- [ ] Handler para `ResourceNotFoundException` → HTTP 404
-  - [ ] Logar warning com detalhes da exceção
-  - [ ] Retornar `ErrorResponse` padronizado
-- [ ] Handler para `DuplicateResourceException` → HTTP 409 (Conflict)
-  - [ ] Logar warning com detalhes
-- [ ] Handler para `ValidationException` → HTTP 400
-  - [ ] Retornar lista de erros de validação
-- [ ] Handler para `MethodArgumentNotValidException` → HTTP 400
-  - [ ] Mapear erros do Bean Validation
-  - [ ] Retornar campo + mensagem de erro
-- [ ] Handler para `HttpMessageNotReadableException` → HTTP 400
-  - [ ] Tratar JSON malformado
-- [ ] Handler para `ExternalServiceException` → HTTP 503
-  - [ ] Indicar serviço indisponível
-- [ ] Handler para `MappingException` → HTTP 500
-  - [ ] Logar error com stacktrace
-  - [ ] Mensagem genérica ao cliente
-- [ ] Handler para `Exception` genérica → HTTP 500
-  - [ ] Logar error com stacktrace
-  - [ ] Não expor detalhes internos ao cliente
+- [x] Handler para `ResourceNotFoundException` → HTTP 404
+  - [x] Logar warning com detalhes da exceção
+  - [x] Retornar `ErrorResponse` padronizado
+- [x] Handler para `DuplicateResourceException` → HTTP 409 (Conflict)
+  - [x] Logar warning com detalhes
+- [x] Handler para `ValidationException` → HTTP 400
+  - [x] Retornar lista de erros de validação
+- [x] Handler para `MethodArgumentNotValidException` → HTTP 400
+  - [x] Mapear erros do Bean Validation
+  - [x] Retornar campo + mensagem de erro
+- [x] Handler para `HttpMessageNotReadableException` → HTTP 400
+  - [x] Tratar JSON malformado
+- [x] Handler para `ExternalServiceException` → HTTP 503
+  - [x] Indicar serviço indisponível
+- [x] Handler para `MappingException` → HTTP 500
+  - [x] Logar error com stacktrace
+  - [x] Mensagem genérica ao cliente
+- [x] Handler para `Exception` genérica → HTTP 500
+  - [x] Logar error com stacktrace
+  - [x] Não expor detalhes internos ao cliente
 
 #### Task 1.2.3: Implementar handler para Feign exceptions
 - [ ] Handler para `FeignException` → HTTP apropriado
