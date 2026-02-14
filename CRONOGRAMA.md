@@ -145,13 +145,13 @@
   - [x] Não expor detalhes internos ao cliente
 
 #### Task 1.2.3: Implementar handler para Feign exceptions
-- [ ] Handler para `FeignException` → HTTP apropriado
-- [ ] Tratar timeout e connection refused
+- [x] Handler para `FeignException` → HTTP apropriado
+- [x] Tratar timeout e connection refused
 
 ### 📌 Epic 1.3: Padronização de Respostas de Erro (3 pts)
 
 #### Task 1.3.1: Criar DTOs de resposta de erro
-- [ ] Criar/atualizar `ErrorResponse` com campos:
+- [x] Criar/atualizar `ErrorResponse` com campos:
   ```java
   - timestamp (LocalDateTime)
   - status (int)
@@ -161,7 +161,7 @@
   - errorCode (String) // ex: "USER_NOT_FOUND"
   - traceId (String) // para rastreabilidade
   ```
-- [ ] Criar `ValidationErrorResponse` extends `ErrorResponse`:
+- [x] Criar `ValidationErrorResponse` extends `ErrorResponse`:
   ```java
   - errors (List<FieldError>)
     - field (String)
@@ -170,17 +170,17 @@
   ```
 
 #### Task 1.3.2: Documentar códigos de erro
-- [ ] Criar seção no README com tabela de códigos de erro
-- [ ] Incluir exemplos de respostas de erro em cada endpoint
+- [x] Criar seção no README com tabela de códigos de erro
+- [x] Incluir exemplos de respostas de erro em cada endpoint
 
 #### Task 1.3.3: Refatorar Services existentes
-- [ ] Refatorar `UsuarioServiceImpl.buscarUsuarioPorId()`:
-  - [ ] Substituir `return null` por `throw new ResourceNotFoundException`
-- [ ] Refatorar `UsuarioServiceImpl.atualizarUsuario()`:
-  - [ ] Substituir `throw new Exception` por exceções específicas
-- [ ] Refatorar `UsuarioServiceImpl.deletarUsuario()`:
-  - [ ] Substituir `throw new Exception` por exceções específicas
-- [ ] Remover `throws Exception` das assinaturas dos métodos
+- [x] Refatorar `UsuarioServiceImpl.buscarUsuarioPorId()`:
+  - [x] Substituir `return null` por `throw new ResourceNotFoundException`
+- [x] Refatorar `UsuarioServiceImpl.atualizarUsuario()`:
+  - [x] Substituir `throw new Exception` por exceções específicas
+- [x] Refatorar `UsuarioServiceImpl.deletarUsuario()`:
+  - [x] Substituir `throw new Exception` por exceções específicas
+- [x] Remover `throws Exception` das assinaturas dos métodos
 
 ---
 
